@@ -1,4 +1,10 @@
-// minilib
+/*
+Knot by Simon Madine is licensed under a Creative Commons Attribution 3.0 Unported License.
+http://creativecommons.org/licenses/by/3.0/
+Permissions beyond the scope of this license may be available at http://thingsinjars.com.
+*/
+
+// minilib, mostly by thomasfuchs (pre-zepto)
 function $(id){ if(id.nodeType) {return id;} else {return document.getElementById(id);} }
 function html(id,  html){ $(id).innerHTML = html; }
 function css(id,  style){ $(id).style.cssText += ';'+style; }
@@ -7,6 +13,7 @@ function dc(tag) { return document.createElement(tag); };
 function listen(id,  hook,  listener,  bubble) {$(id).addEventListener(hook,  listener,  bubble);}
 function doNothing(e) {e.preventDefault();}
 function collect(a,f){var n=[];for(var i=0;i<a.length;i++){var v=f(a[i]);if(v!=null)n.push(v)}return n};
+//ajax by timmorgan (http://snippets.dzone.com/posts/show/2025)
 ajax={};
 ajax.x=function(){try{return new ActiveXObject('Msxml2.XMLHTTP')}catch(e){try{return new ActiveXObject('Microsoft.XMLHTTP')}catch(e){return new XMLHttpRequest()}}};
 ajax.serialize=function(f){var g=function(n){return f.getElementsByTagName(n)};var nv=function(e){if(e.name)return encodeURIComponent(e.name)+'='+encodeURIComponent(e.value);else return ''};var i=collect(g('input'),function(i){if((i.type!='radio'&&i.type!='checkbox')||i.checked)return nv(i)});var s=collect(g('select'),nv);var t=collect(g('textarea'),nv);return i.concat(s).concat(t).join('&');};
@@ -85,7 +92,7 @@ function evXY(e) {
     },
     instantiatePatterns: function() {
       for (var pattern in patternSeeds){
-          TileBoard.createHomeomorphisms(pattern, patternSeeds[pattern]);
+          TileBoard.createIsomorphisms(pattern, patternSeeds[pattern]);
       };
     },
     clear: function() {
@@ -251,7 +258,7 @@ function evXY(e) {
       seed = seed.replace('x','8');
       return seed;
     },
-    createHomeomorphisms: function(patternName, pattern) {
+    createIsomorphisms: function(patternName, pattern) {
       //rotations
       //mirror
       //cycle x 3
@@ -569,18 +576,18 @@ function evXY(e) {
   draw();
   // listen(document, 'mousemove', highlightTile, false);
 
-  listen(c, 'mousedown', grabTile, false);
-  listen(c, 'touchstart', grabTile, false);
+  listen($('c'), 'mousedown', grabTile, false);
+  listen($('c'), 'touchstart', grabTile, false);
 
 //  listen(document, 'touchstart', showOrder, false);
 
-  listen(c, 'mousemove', moveTile, false);
+  listen($('c'), 'mousemove', moveTile, false);
   listen($('c'), 'touchmove', moveTile, false);
 
-  listen(c, 'mouseup', snapPosition, false);
-  listen(c, 'touchend', snapPosition, false);
+  listen($('c'), 'mouseup', snapPosition, false);
+  listen($('c'), 'touchend', snapPosition, false);
 
-  listen(c, 'touchmove', doNothing, false);
+  listen($('c'), 'touchmove', doNothing, false);
   // listen(body, 'touchmove', doNothing, false);
 
   notify('ready');
