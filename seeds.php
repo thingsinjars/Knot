@@ -1,12 +1,5 @@
 <?php
-$config = array();
-$config['user'] = 'angryrobotzombie';
-$config['pass'] = 'monkeybutter';
-$config['name'] = 'zombie_apps';
-$config['host'] = 'bigbrain.angryrobotzombie.com';
-$config['type'] = 'mysql';
-$config['port'] = 3306;
-$config['persistent'] = true;
+include 'config.inc';
 include 'cxpdo.php';
 $db = db::instance($config);
 
