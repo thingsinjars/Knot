@@ -1,12 +1,5 @@
 <?php
-$config = array();
-$config['user'] = 'xXxXxXxXxXx';
-$config['pass'] = 'xXxXxXxXxXx';
-$config['name'] = 'zombie_apps';
-$config['host'] = 'xXxXxXxXxXx.xXxXxXxXxXx.com';
-$config['type'] = 'mysql';
-$config['port'] = 3306;
-$config['persistent'] = true;
+include 'config.inc';
 include 'cxpdo.php';
 $db = db::instance($config);
 
